@@ -1,50 +1,34 @@
-resource "azurerm_virtual_network" "rookout" {
-  count = var.create_vnet ? 1 : 0
+module "vnet" {
+  count   = var.create_vnet ? 1 : 0
+  source  = "Azure/vnet/azurerm"
 
-  name                = "${var.environment}-rookout"
+  vnet_name           = "${var.environment}-rookout"
+  vnet_location       = local.resource_group_location
   resource_group_name = local.resource_group_name
-  location            = local.resource_group_location
   address_space       = [var.vnet_cidr]
+  subnet_prefixes     = concat(var.backend_subnets, var.frontend_subnets)
+  subnet_names        = ["backend", "frontend"]
 
-  tags = local.tags
-
-}
-
-resource "azurerm_subnet" "frontend" {
-  count = var.create_vnet ? 1 : 0
-
-  name                 = "${var.environment}-rookout-frontend"
-  resource_group_name  = local.resource_group_name
-  virtual_network_name = azurerm_virtual_network.rookout[0].name
-  address_prefixes     = var.frontend_subnets
-
-  depends_on = [azurerm_virtual_network.rookout]
-
-}
-
-resource "azurerm_subnet" "backend" {
-  count = var.create_vnet ? 1 : 0
-
-  name                 = "${var.environment}-rookout-backend"
-  resource_group_name  = local.resource_group_name
-  virtual_network_name = azurerm_virtual_network.rookout[0].name
-  address_prefixes     = var.backend_subnets
-
-  delegation {
-    name = "delegation"
-
-    service_delegation {
-      name = "Microsoft.ContainerInstance/containerGroups"
-      actions = [
-        # "Microsoft.Network/virtualNetworks/subnets/join/action", 
-        # "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
-        "Microsoft.Network/virtualNetworks/subnets/action"
-      ]
+  subnet_delegation = {
+    backend = {
+      "Microsoft.ContainerInstance" = {
+        service_name    = "Microsoft.ContainerInstance/containerGroups"
+        service_actions = [
+          "Microsoft.Network/virtualNetworks/subnets/action",
+        ]
+      }
     }
   }
 
-  depends_on = [azurerm_virtual_network.rookout]
+  tags = local.tags
 
+  depends_on = [local.resource_group_name]
+
+}
+
+locals {
+  backend_subnet_id  = var.create_vnet ? module.vnet[0].vnet_subnets[0] : var.backend_subnets[0]
+  frontend_subnet_id = var.create_vnet ? module.vnet[0].vnet_subnets[1] : var.frontend_subnets[0]
 }
 
 resource "azurerm_public_ip" "datastore" {
@@ -61,7 +45,7 @@ resource "azurerm_public_ip" "datastore" {
 }
 
 resource "azurerm_public_ip" "controller" {
-  count = 0 #var.deploy_app_gw && var.internal_controller_app_gw == false ? 1 : 0
+  count = var.deploy_app_gw && !var.internal_controller_app_gw ? 1 : 0
 
   name                = "${var.environment}-rookout-controller-pip"
   sku                 = "Standard"
@@ -69,6 +53,19 @@ resource "azurerm_public_ip" "controller" {
   location            = local.resource_group_location
   allocation_method   = "Static"
   domain_name_label   = "${var.environment}-rookout-controller"
+
+  tags = local.tags
+}
+
+resource "azurerm_public_ip" "demo" {
+  count = var.deploy_app_gw && var.deploy_demo_app ? 1 : 0
+
+  name                = "${var.environment}-rookout-demo-pip"
+  sku                 = "Basic"
+  resource_group_name = local.resource_group_name
+  location            = local.resource_group_location
+  allocation_method   = "Dynamic"
+  domain_name_label   = "${var.environment}-rookout-demo"
 
   tags = local.tags
 }
@@ -83,7 +80,7 @@ resource "azurerm_network_profile" "private" {
 
     ip_configuration {
       name      = "${var.environment}-rookout-backend"
-      subnet_id = var.create_vnet ? azurerm_subnet.backend[0].id : var.backend_subnets[0]
+      subnet_id = var.create_vnet ? local.backend_subnet_id : var.backend_subnets[0]
     }
   }
 

@@ -1,4 +1,3 @@
-
 locals {
   controller_settings = {
     container_name    = "rookout-controller"
@@ -10,7 +9,7 @@ locals {
     container_cpu     = var.controller_resource.cpu
     container_memory  = var.controller_resource.memory
     container_port    = 7488
-    app_gateway_port  = 7488
+    app_gateway_port  = 443
   }
 
   controller_environment_variables = merge(

@@ -1,16 +1,17 @@
 
 locals {
+  controller_host = "ws://${azurerm_container_group.controller.ip_address}"
   demo_settings = {
     container_name   = "rookout-tutorial-python"
     container_cpu    = 0.5
     container_memory = 0.5
     container_port   = 5000
-    app_gateway_port = 443
+    app_gateway_port = 80
   }
 
   demo_environment_variables = merge(
     {
-      ROOKOUT_CONTROLLER_HOST = "ws://${azurerm_container_group.controller.ip_address}"
+      ROOKOUT_CONTROLLER_HOST = local.controller_host
       ROOKOUT_CONTROLLER_PORT = local.controller_settings.container_port
       ROOKOUT_REMOTE_ORIGIN   = "https://github.com/Rookout/tutorial-python.git"
       ROOKOUT_COMMIT          = "HEAD"

@@ -103,7 +103,6 @@ variable "frontend_subnets" {
   default = ["172.30.1.0/24"]
 }
 
-
 ## Application Gateway
 variable "deploy_app_gw" {
   type        = bool
@@ -146,6 +145,12 @@ variable "additional_demo_app_env_vars" {
 }
 
 ## Self managed Key Vault certificates
+variable "key_vault_name" {
+  type        = string
+  default     = ""
+  description = "Key Vault containing certificates name. "
+}
+
 variable "datastore_vault_certificate_id" {
   type        = string
   default     = ""

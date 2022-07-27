@@ -1,0 +1,87 @@
+data "azurerm_dns_zone" "selected" {
+  count = var.deploy_app_gw && var.datastore_vault_certificate_id == "" ? 1 : 0
+
+  name                = var.domain_name
+  resource_group_name = local.resource_group_name
+}
+
+resource "azurerm_dns_zone" "sub_domain" {
+  count = var.deploy_app_gw && var.datastore_vault_certificate_id == "" ? 1 : 0
+
+  name                = "rookout.${var.domain_name}"
+  resource_group_name = local.resource_group_name
+}
+
+resource "azurerm_dns_ns_record" "rookout" {
+  count = var.deploy_app_gw && var.datastore_vault_certificate_id == "" ? 1 : 0
+
+  name                = "rookout.${data.azurerm_dns_zone.selected[0].name}"
+  zone_name           = azurerm_dns_zone.sub_domain[0].name
+  resource_group_name = local.resource_group_name
+  ttl                 = 172800
+
+  records = data.azurerm_dns_zone.selected[0].name_servers
+
+  tags = local.tags
+}
+
+resource "azurerm_app_service_certificate_order" "rookout" {
+  count = var.deploy_datastore && var.deploy_app_gw && var.datastore_vault_certificate_id == "" ? 1 : 0
+
+  name                = "${var.environment}-rookout-cert-order"
+  resource_group_name = local.resource_group_name
+  location            = "global"
+  distinguished_name  = "CN=datastore.rookout.${var.domain_name}"
+  product_type        = "Standard"
+}
+
+resource "azurerm_dns_txt_record" "validation" {
+  count = var.deploy_datastore && var.deploy_app_gw && var.datastore_vault_certificate_id == "" ? 1 : 0
+
+  name                = "@"
+  zone_name           = azurerm_dns_zone.selected.name
+  resource_group_name = local.resource_group_name
+  ttl                 = 300
+
+  record {
+    value = azurerm_app_service_certificate_order.rookout.domain_verification_token 
+  }
+
+  tags = local.tags
+}
+
+# The story ends here, we cannot point "azurerm_app_service_certificate_order" to key vault to store cert, and we cannot add additional dns names. Didn't find any workaround here.
+
+
+resource "azurerm_dns_a_record" "controller" {
+  count = var.deploy_app_gw && var.controller_vault_certificate_id == "" && !var.internal_controller_app_gw ? 1 : 0
+
+  name                = "controller.rookout.${var.domain_name}"
+  zone_name           = azurerm_dns_zone.sub_domain[0].name
+  resource_group_name = local.resource_group_name
+  ttl                 = 300
+  records             = [azurerm_public_ip.controller.ip_address]
+
+}
+
+resource "azurerm_dns_a_record" "datastore" {
+  count = var.deploy_datastore && var.deploy_app_gw && var.datastore_vault_certificate_id == "" ? 1 : 0
+
+  name                = "datastore.rookout.${var.domain_name}"
+  zone_name           = azurerm_dns_zone.sub_domain[0].name
+  resource_group_name = local.resource_group_name
+  ttl                 = 300
+  records             = [azurerm_public_ip.datastore.ip_address]
+
+}
+
+resource "azurerm_dns_a_record" "demo" {
+  count = var.deploy_app_gw && var.deploy_demo_app && var.datastore_vault_certificate_id == "" ? 1 : 0
+
+  name                = "demo.rookout.${var.domain_name}"
+  zone_name           = azurerm_dns_zone.sub_domain[0].name
+  resource_group_name = local.resource_group_name
+  ttl                 = 300
+  records             = [azurerm_public_ip.demo.ip_address]
+  
+}
