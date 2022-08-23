@@ -22,9 +22,8 @@ The module implements the following architectures (public/private deployments):
 
 sdfsdfsdf
 
-https://github.com/Rookout/terraform-azure-rookout-deployment/blob/7158d9cb9ab5ab3af397b0afd00968f693da0205/examples/private_default.tf#L1-L9
+https://github.com/Rookout/terraform-azure-rookout-deployment/blob/7158d9cb9ab5ab3af397b0afd00968f693da0205/src/private_default.tf#L1-L9
 
-https://github.com/stevemar/code-reference-in-readme/blob/031e04f922c14ecd5b03a79d8c979ba8f3ab1e39/src/main.py#L1-L6
 
 ## Components
 
