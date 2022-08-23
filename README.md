@@ -18,13 +18,49 @@ The module implements the following architectures (public/private deployments):
    rookout_token = "..."
    ```
 
-## Usage
+## Usage - Public
+In this deployment, both Rookout's components controller and datastore will be internet facing. A public domain and Azure public hosted zone should be used for that.
 
-https://github.com/Rookout/terraform-azure-rookout-deployment/blob/main/src/private_default.tf#L1-L9
+   ```hcl
+   module "rookout" {
+      source  = "Rookout/rookout-deployment/azure"
+      # version = x.y.z
+      
+      domain_name = "YOUR_DOMAIN"
+      domain_resource_group = "DOMAIN'S_RESOUCRE_GROUP"
 
+      rookout_token = "YOUR_TOKEN"
+   }
+   ```
 
-## Components
+## Usage - Private (internal)
+In this deployment, both Rookout's components controller and datastore can be reached from virtual netwrok only (for deployment to existing one check next bullet). private hosted zone will be created, components url in the output of the module.
 
+   ```hcl
+   module "rookout" {
+      source  = "Rookout/rookout-deployment/azure"
+      # version = x.y.z
+      
+      rookout_token = "YOUR_TOKEN"
+      internal = true
+      }
+   ```
+
+## Existing virual netowrk
+To use existing virtual network, the next vairables should be passed for public or private deployments.
+
+   ```hcl
+   module "rookout" {
+    ....
+    
+      create_vnet = false
+      existing_vnet_name = "..."
+      existing_vnet_resource_group = "..."
+
+      subnet_app_serivce_cidr = "x.y.z.0/28"
+      private_endpoint_subnet_cidr ="x.y.z.64/28"
+   }
+   ```
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
