@@ -20,8 +20,7 @@ The module implements the following architectures (public/private deployments):
 
 ## Usage
 
-https://github.com/Rookout/terraform-azure-rookout-deployment/blob/main/examples/public_default.tf#L1-L9
-
+https://github.com/Rookout/terraform-azure-rookout-deployment/blob/7158d9cb9ab5ab3af397b0afd00968f693da0205/examples/private_default.tf#L1-L9
 ## Components
 
 
