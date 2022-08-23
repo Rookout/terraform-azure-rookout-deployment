@@ -20,8 +20,6 @@ The module implements the following architectures (public/private deployments):
 
 ## Usage
 
-sdfsdfsdf
-
 https://github.com/Rookout/terraform-azure-rookout-deployment/blob/main/src/private_default.tf#L1-L9
 
 
