@@ -20,17 +20,7 @@ The module implements the following architectures (public/private deployments):
 
 ## Usage
 
-<div id="code-element"></div>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-      axios({
-      method: 'get',
-      url: 'https://raw.githubusercontent.com/Rookout/terraform-azure-rookout-deployment/main/examples/public_default.tf'
-       })
-      .then(function (response) {
-         document.getElementById("code-element").innerHTML = response.data;
-      });
-</script>
+https://github.com/Rookout/terraform-azure-rookout-deployment/blob/main/examples/public_default.tf#L1-L9
 
 ## Components
 
