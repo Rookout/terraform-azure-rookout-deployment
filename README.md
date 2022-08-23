@@ -4,10 +4,10 @@ This terraform deploying Rookout Controller and Rookout Datastore using App Serv
 
 The module implements the following architectures (public/private deployments):
 
-<img src="https://github.com/Rookout/aws-deployment/blob/main/documentation/Azure_Deployment_Private.jpg?raw=true" width="900">
+<img src="https://github.com/Rookout/terraform-azure-rookout-deployment/blob/main/documentation/Azure_Deployment_Private.jpg?raw=true" width="900">
 
 
-<img src="https://github.com/Rookout/aws-deployment/blob/main/documentation/Azure_Deployment_Public.jpg?raw=true" width="900">
+<img src="https://github.com/Rookout/terraform-azure-rookout-deployment/blob/main/documentation/Azure_Deployment._Public.jpg?raw=true" width="900">
 
 ### Prerequisites 
 1. Terraform installed.
