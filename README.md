@@ -19,7 +19,8 @@ The module implements the following architectures (public/private deployments):
    ```
 
 ## Usage - Public
-In this deployment, both Rookout's components controller and datastore will be internet facing. A public domain and Azure public hosted zone should be used for that.
+In this deployment, both the component controller and the datastore will be internet-facing. 
+A public domain and Azure public hosted zone should be used for public deployments.
 
    ```hcl
    module "rookout" {
@@ -34,7 +35,10 @@ In this deployment, both Rookout's components controller and datastore will be i
    ```
 
 ## Usage - Private (internal)
-In this deployment, both Rookout's components controller and datastore can be reached from virtual network only (for deployment to an existing virtual network, see the next section). A private hosted zone will be created. The output of the module is a components url
+In this deployment, both the component controller and datastore are reachable only from virtual network. 
+A private hosted zone will be created (for deployment to an existing virtual network, see the next section). 
+
+The output of this module is the components url.
 
    ```hcl
    module "rookout" {
@@ -46,8 +50,8 @@ In this deployment, both Rookout's components controller and datastore can be re
       }
    ```
 
-## Existing virual netowrk
-To use existing virtual network, the next vairables should be passed for public or private deployments.
+## Existing virtual network
+To use an existing virtual network, the following variables should be passed for both public and private deployments.
 
    ```hcl
    module "rookout" {
