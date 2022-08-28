@@ -1,6 +1,6 @@
 ## terraform-azure-rookout-deployment
 
-This terraform deploying Rookout Controller and Rookout Datastore using App Service on Azure cloud.
+This Terraform deploys Rookout Controller and Rookout Datastore using App Service on Azure cloud.
 
 The module implements the following architectures (public/private deployments):
 
@@ -10,9 +10,9 @@ The module implements the following architectures (public/private deployments):
 <img src="https://github.com/Rookout/terraform-azure-rookout-deployment/blob/main/documentation/Azure_Deployment_Public.jpg?raw=true" width="900">
 
 ### Prerequisites 
-1. Terraform installed.
-2. ([azure quickstart-configure of terraform](https://docs.microsoft.com/en-us/azure/developer/terraform/quickstart-configure)).
-3. Create a `provider.tf` as examplined in previous guide.
+1. Install Terraform.
+2. [Configure Terraform for your Azure account](https://docs.microsoft.com/en-us/azure/developer/terraform/quickstart-configure).
+3. Create a provider block as specified in the guide chosen above (for example in the [Azure Cloud Shell/Bash guide](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-cloud-shell-bash?tabs=bash#specify-service-principal-credentials-in-a-terraform-provider-block)). 
 4. Get your organizational Rookout token, and pass it as a variable to this module
    ```
    rookout_token = "..."
@@ -34,7 +34,7 @@ In this deployment, both Rookout's components controller and datastore will be i
    ```
 
 ## Usage - Private (internal)
-In this deployment, both Rookout's components controller and datastore can be reached from virtual netwrok only (for deployment to existing one check next bullet). private hosted zone will be created, components url in the output of the module.
+In this deployment, both Rookout's components controller and datastore can be reached from virtual network only (for deployment to an existing virtual network, see the next section). A private hosted zone will be created. The output of the module is a components url
 
    ```hcl
    module "rookout" {
