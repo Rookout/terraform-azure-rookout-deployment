@@ -1,4 +1,4 @@
-## terraform-azure-rookout-deployment
+## Terraform Azure - Rookout Deployment
 
 This Terraform deploys Rookout Controller and Rookout Datastore using App Service on Azure cloud.
 
