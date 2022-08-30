@@ -1,6 +1,6 @@
-## terraform-azure-rookout-deployment
+## Terraform Azure - Rookout Deployment
 
-This terraform deploying Rookout Controller and Rookout Datastore using App Service on Azure cloud.
+This Terraform deploys Rookout Controller and Rookout Datastore using App Service on Azure cloud.
 
 The module implements the following architectures (public/private deployments):
 
@@ -10,16 +10,17 @@ The module implements the following architectures (public/private deployments):
 <img src="https://github.com/Rookout/terraform-azure-rookout-deployment/blob/main/documentation/Azure_Deployment_Public.jpg?raw=true" width="900">
 
 ### Prerequisites 
-1. Terraform installed.
-2. ([azure quickstart-configure of terraform](https://docs.microsoft.com/en-us/azure/developer/terraform/quickstart-configure)).
-3. Create a `provider.tf` as examplined in previous guide.
-4. Get your organizational Rookout token, and pass it as a variable to this module
+1. Install Terraform.
+2. [Configure Terraform for your Azure account](https://docs.microsoft.com/en-us/azure/developer/terraform/quickstart-configure).
+3. Create a provider block as specified in the guide chosen above (for example in the [Azure Cloud Shell/Bash guide](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-cloud-shell-bash?tabs=bash#specify-service-principal-credentials-in-a-terraform-provider-block)). 
+4. Get your organization's Rookout token from the [Rookout web application](https://www.app.rookout.com). The token must be passed as a variable to the module you will be creating.
    ```
    rookout_token = "..."
    ```
 
 ## Usage - Public
-In this deployment, both Rookout's components controller and datastore will be internet facing. A public domain and Azure public hosted zone should be used for that.
+In this deployment, both the component controller and the datastore will be internet-facing. 
+A public domain and Azure public hosted zone should be used for public deployments.
 
    ```hcl
    module "rookout" {
@@ -34,7 +35,10 @@ In this deployment, both Rookout's components controller and datastore will be i
    ```
 
 ## Usage - Private (internal)
-In this deployment, both Rookout's components controller and datastore can be reached from virtual netwrok only (for deployment to existing one check next bullet). private hosted zone will be created, components url in the output of the module.
+In this deployment, both the component controller and datastore are reachable only from virtual network. 
+A private hosted zone will be created (for deployment to an existing virtual network, see the next section). 
+
+The output of this module is the components url.
 
    ```hcl
    module "rookout" {
@@ -46,8 +50,8 @@ In this deployment, both Rookout's components controller and datastore can be re
       }
    ```
 
-## Existing virual netowrk
-To use existing virtual network, the next vairables should be passed for public or private deployments.
+## Existing virtual network
+To use an existing virtual network, the following variables should be passed for both public and private deployments.
 
    ```hcl
    module "rookout" {
