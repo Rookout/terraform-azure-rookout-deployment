@@ -13,7 +13,7 @@ The module implements the following architectures (public/private deployments):
 1. Install Terraform.
 2. [Configure Terraform for your Azure account](https://docs.microsoft.com/en-us/azure/developer/terraform/quickstart-configure).
 3. Create a provider block as specified in the guide chosen above (for example in the [Azure Cloud Shell/Bash guide](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-cloud-shell-bash?tabs=bash#specify-service-principal-credentials-in-a-terraform-provider-block)). 
-4. Get your organization's Rookout token from the [Rookout web application](https://www.app.rookout.com). The token must be passed as a variable to the module you will be creating.
+4. Get your organization's Rookout token from the [Rookout web application](https://app.rookout.com). The token must be passed as a variable to the module you will be creating.
    ```
    rookout_token = "..."
    ```
