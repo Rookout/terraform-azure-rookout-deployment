@@ -146,3 +146,7 @@ No modules.
 | <a name="output_datastore_dns"></a> [datastore\_dns](#output\_datastore\_dns) | n/a |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
 <!-- END_TF_DOCS -->
+
+## Developers
+We're using [Release Please](https://github.com/googleapis/release-please) for releasing the module. Please make sure you follow the [guidelines for commit messages](https://github.com/googleapis/release-please#how-should-i-write-my-commits) 
+
