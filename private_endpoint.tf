@@ -3,7 +3,7 @@ resource "azurerm_subnet" "private_endpoint_subnet" {
 
   name                 = "${var.environment}-rookout-app-private-endpoint-subnet"
   resource_group_name  = azurerm_resource_group.rookout.name
-  virtual_network_name = var.create_vnet ? azurerm_virtual_network.rookout[0].name : azurerm_virtual_network.selected[0].name
+  virtual_network_name = var.create_vnet ? azurerm_virtual_network.rookout[0].name : data.azurerm_virtual_network.selected[0].name
   address_prefixes     = [var.private_endpoint_subnet_cidr]
 
   enforce_private_link_endpoint_network_policies = true
