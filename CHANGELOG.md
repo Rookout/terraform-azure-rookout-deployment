@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/Rookout/terraform-azure-rookout-deployment/compare/v0.1.1...v0.1.2) (2023-03-07)
+
+
+### Bug Fixes
+
+* add dev guidelines to readme ([5592bf8](https://github.com/Rookout/terraform-azure-rookout-deployment/commit/5592bf84f9b3cbb26a5e22844465ff9e9a689f95))
+
 ## [0.1.1](https://github.com/Rookout/terraform-azure-rookout-deployment/compare/v0.1.0...v0.1.1) (2022-08-30)
 
 
