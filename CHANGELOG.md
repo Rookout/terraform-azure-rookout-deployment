@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/Rookout/terraform-azure-rookout-deployment/compare/v0.1.2...v0.1.3) (2023-03-08)
+
+
+### Bug Fixes
+
+* release please trigger ([2f30d4c](https://github.com/Rookout/terraform-azure-rookout-deployment/commit/2f30d4c8bbd1f6f34d9126602d614b99a5cf76ef))
+
 ## [0.1.2](https://github.com/Rookout/terraform-azure-rookout-deployment/compare/v0.1.1...v0.1.2) (2023-03-07)
 
 
