@@ -12,8 +12,8 @@ locals {
 
 resource "azurerm_linux_web_app" "datastore" {
   name                = "${var.environment}-rookout-datastore-app"
-  location            = azurerm_resource_group.rookout.location
-  resource_group_name = azurerm_resource_group.rookout.name
+  location            = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].location : azurerm_resource_group.selected[0].location
+  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : azurerm_resource_group.selected[0].name
   service_plan_id     = azurerm_service_plan.controller.id
 
   site_config {
@@ -54,7 +54,7 @@ resource "azurerm_app_service_custom_hostname_binding" "datastore" {
   count               = var.internal ? 0 : 1
   hostname            = join(".", [azurerm_dns_cname_record.datastore[0].name, azurerm_dns_cname_record.datastore[0].zone_name])
   app_service_name    = azurerm_linux_web_app.datastore.name
-  resource_group_name = azurerm_resource_group.rookout.name
+  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : azurerm_resource_group.selected[0].name
 
   depends_on = [azurerm_dns_txt_record.datastore[0]]
 }

@@ -59,7 +59,7 @@ To use an existing virtual network, the following variables should be passed for
     
       create_vnet = false
       existing_vnet_name = "..."
-      existing_vnet_resource_group = "..."
+      existing_resource_group_name = "..."
 
       subnet_app_serivce_cidr = "x.y.z.0/28"
       private_endpoint_subnet_cidr ="x.y.z.64/28"
@@ -127,8 +127,8 @@ No modules.
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain of your applicaiton | `string` | `""` | no |
 | <a name="input_domain_resource_group"></a> [domain\_resource\_group](#input\_domain\_resource\_group) | Resource group of domain hosted zone | `string` | `""` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | This variable used for namespacing and renaming resources | `string` | `"test"` | no |
+| <a name="input_existing_resource_group_name"></a> [existing\_resource\_group\_name](#input\_existing\_resource\_group\_name) | Resource group of provided virtual network | `string` | `""` | no |
 | <a name="input_existing_vnet_name"></a> [existing\_vnet\_name](#input\_existing\_vnet\_name) | Provided virtual network name, where rookout app service will be deployed | `string` | `""` | no |
-| <a name="input_existing_vnet_resource_group"></a> [existing\_vnet\_resource\_group](#input\_existing\_vnet\_resource\_group) | Resource group of provided virtual network | `string` | `""` | no |
 | <a name="input_internal"></a> [internal](#input\_internal) | Flag to switch the deployment to be internal | `bool` | `false` | no |
 | <a name="input_location"></a> [location](#input\_location) | Location of resources | `string` | `"northeurope"` | no |
 | <a name="input_private_endpoint_subnet_cidr"></a> [private\_endpoint\_subnet\_cidr](#input\_private\_endpoint\_subnet\_cidr) | CIDR of private endpoint, for internal deployment | `string` | `"10.10.0.64/26"` | no |
