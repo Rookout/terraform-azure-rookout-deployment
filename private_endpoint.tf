@@ -1,5 +1,13 @@
+data "azurerm_subnet" "private_endpoint_selected" {
+  count = var.internal && !var.private_endpoint_subnet_name == "" ? 1 : 0
+
+  name                 = var.private_endpoint_subnet_name
+  virtual_network_name = data.azurerm_virtual_network.selected[0].name
+  resource_group_name  = var.existing_vnet_resource_group_name
+}
+
 resource "azurerm_subnet" "private_endpoint_subnet" {
-  count = var.internal ? 1 : 0
+  count = var.internal && var.private_endpoint_subnet_name == "" ? 1 : 0
 
   name                 = "${var.environment}-rookout-app-private-endpoint-subnet"
   resource_group_name  = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
