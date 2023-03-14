@@ -5,8 +5,8 @@
 
 ### Features
 
-* added support for pre-existing subnets ([#14](https://github.com/Rookout/terraform-azure-rookout-deployment/issues/13)) ([002a0a8](https://github.com/Rookout/terraform-azure-rookout-deployment/commit/002a0a879bdc5c62a1807640a4d94fc0ed791fd6))
-* existing resource group usage ([#14](https://github.com/Rookout/terraform-azure-rookout-deployment/issues/12)) ([793f8467](https://github.com/Rookout/terraform-azure-rookout-deployment/commit/793f8467c6b2d83675e7ee1bc9c3f5e03cb98174))
+* added support for pre-existing subnets ([#13](https://github.com/Rookout/terraform-azure-rookout-deployment/issues/13)) ([002a0a8](https://github.com/Rookout/terraform-azure-rookout-deployment/commit/002a0a879bdc5c62a1807640a4d94fc0ed791fd6))
+* existing resource group usage ([#12](https://github.com/Rookout/terraform-azure-rookout-deployment/issues/12)) ([793f8467](https://github.com/Rookout/terraform-azure-rookout-deployment/commit/793f8467c6b2d83675e7ee1bc9c3f5e03cb98174))
 
 ## [0.1.3](https://github.com/Rookout/terraform-azure-rookout-deployment/compare/v0.1.2...v0.1.3) (2023-03-08)
 
