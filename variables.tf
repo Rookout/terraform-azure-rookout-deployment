@@ -49,7 +49,7 @@ variable "private_endpoint_subnet_cidr" {
   description = "CIDR of private endpoint, for internal deployment"
 }
 
-variable "subnet_app_serivce_name" {
+variable "subnet_app_service_name" {
   type        = string
   default     = ""
   description = "App Service delegated subnet, Minimum CIDR mask is 26 bits, should be in existing vnet resource group"
