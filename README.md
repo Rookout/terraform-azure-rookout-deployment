@@ -116,7 +116,10 @@ No modules.
 | [azurerm_virtual_network_gateway.vpn](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/virtual_network_gateway) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/data-sources/client_config) | data source |
 | [azurerm_dns_zone.selected](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/data-sources/dns_zone) | data source |
+| [azurerm_resource_group.domain](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.selected](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/data-sources/resource_group) | data source |
+| [azurerm_subnet.app_service_selected](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/data-sources/subnet) | data source |
+| [azurerm_subnet.private_endpoint_selected](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/data-sources/subnet) | data source |
 | [azurerm_virtual_network.selected](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/data-sources/virtual_network) | data source |
 
 ## Inputs
@@ -127,13 +130,16 @@ No modules.
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain of your applicaiton | `string` | `""` | no |
 | <a name="input_domain_resource_group"></a> [domain\_resource\_group](#input\_domain\_resource\_group) | Resource group of domain hosted zone | `string` | `""` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | This variable used for namespacing and renaming resources | `string` | `"test"` | no |
-| <a name="input_existing_resource_group_name"></a> [existing\_resource\_group\_name](#input\_existing\_resource\_group\_name) | Resource group of provided virtual network | `string` | `""` | no |
+| <a name="input_existing_resource_group_name"></a> [existing\_resource\_group\_name](#input\_existing\_resource\_group\_name) | Resource group of rookout deployment, if not existing, will create one that named 'ENV-rookout-ResourceGroup' | `string` | `""` | no |
 | <a name="input_existing_vnet_name"></a> [existing\_vnet\_name](#input\_existing\_vnet\_name) | Provided virtual network name, where rookout app service will be deployed | `string` | `""` | no |
+| <a name="input_existing_vnet_resource_group_name"></a> [existing\_vnet\_resource\_group\_name](#input\_existing\_vnet\_resource\_group\_name) | Resource group of provided virtual network | `string` | `""` | no |
 | <a name="input_internal"></a> [internal](#input\_internal) | Flag to switch the deployment to be internal | `bool` | `false` | no |
 | <a name="input_location"></a> [location](#input\_location) | Location of resources | `string` | `"northeurope"` | no |
 | <a name="input_private_endpoint_subnet_cidr"></a> [private\_endpoint\_subnet\_cidr](#input\_private\_endpoint\_subnet\_cidr) | CIDR of private endpoint, for internal deployment | `string` | `"10.10.0.64/26"` | no |
+| <a name="input_private_endpoint_subnet_name"></a> [private\_endpoint\_subnet\_name](#input\_private\_endpoint\_subnet\_name) | Private endpoints subnet, used for internal deployment, Minimum CIDR mask is 26 bits, should be in existing vnet resource group | `string` | `""` | no |
 | <a name="input_rookout_token"></a> [rookout\_token](#input\_rookout\_token) | Rookout's org token | `string` | n/a | yes |
 | <a name="input_subnet_app_serivce_cidr"></a> [subnet\_app\_serivce\_cidr](#input\_subnet\_app\_serivce\_cidr) | vnet subnets | `string` | `"10.10.0.0/26"` | no |
+| <a name="input_subnet_app_serivce_name"></a> [subnet\_app\_serivce\_name](#input\_subnet\_app\_serivce\_name) | App Service delegated subnet, Minimum CIDR mask is 26 bits, should be in existing vnet resource group | `string` | `""` | no |
 | <a name="input_vnet_cidr"></a> [vnet\_cidr](#input\_vnet\_cidr) | CIDR of vnet resource to be created | `string` | `"10.10.0.0/16"` | no |
 
 ## Outputs
