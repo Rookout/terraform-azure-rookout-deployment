@@ -17,7 +17,7 @@ data "azurerm_virtual_network" "selected" {
 }
 
 data "azurerm_subnet" "app_service_selected" {
-  count = !var.create_vnet && var.subnet_app_serivce_name == "" ? 0 : 1
+  count = var.subnet_app_serivce_name == "" ? 0 : 1
 
   name                 = var.subnet_app_serivce_name
   virtual_network_name = data.azurerm_virtual_network.selected[0].name

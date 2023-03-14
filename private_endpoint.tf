@@ -1,5 +1,5 @@
 data "azurerm_subnet" "private_endpoint_selected" {
-  count = var.internal && !var.private_endpoint_subnet_name == "" ? 1 : 0
+  count = var.internal && var.private_endpoint_subnet_name != "" ? 1 : 0
 
   name                 = var.private_endpoint_subnet_name
   virtual_network_name = data.azurerm_virtual_network.selected[0].name
