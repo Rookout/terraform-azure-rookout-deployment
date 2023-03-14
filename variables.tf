@@ -31,7 +31,7 @@ variable "existing_vnet_name" {
   description = "Provided virtual network name, where rookout app service will be deployed"
 }
 
-variable "existing_vnet_resource_group" {
+variable "existing_resource_group_name" {
   type        = string
   default     = ""
   description = "Resource group of provided virtual network"
@@ -58,13 +58,13 @@ variable "rookout_token" {
 
 variable "domain_name" {
   type        = string
-  default = ""
+  default     = ""
   description = "Domain of your applicaiton"
 }
 
 variable "domain_resource_group" {
   type        = string
-  default = ""
+  default     = ""
   description = "Resource group of domain hosted zone"
 }
 

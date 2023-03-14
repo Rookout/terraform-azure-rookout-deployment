@@ -12,8 +12,8 @@ locals {
 
 resource "azurerm_linux_web_app" "controller" {
   name                = "${var.environment}-rookout-controller-app"
-  location            = azurerm_resource_group.rookout.location
-  resource_group_name = azurerm_resource_group.rookout.name
+  location            = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].location : data.azurerm_resource_group.selected[0].location
+  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
   service_plan_id     = azurerm_service_plan.controller.id
 
   site_config {
@@ -60,7 +60,7 @@ resource "azurerm_app_service_custom_hostname_binding" "controller" {
 
   hostname            = trim(azurerm_dns_cname_record.controller[0].fqdn, ".")
   app_service_name    = azurerm_linux_web_app.controller.name
-  resource_group_name = azurerm_resource_group.rookout.name
+  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
 
   depends_on = [azurerm_dns_txt_record.controller[0]]
 
