@@ -1,4 +1,4 @@
-data "azurerm_resource_group" "selected" {
+data "azurerm_resource_group" "domain" {
   count = var.internal ? 0 : 1
 
   name = var.domain_resource_group
@@ -8,14 +8,14 @@ data "azurerm_dns_zone" "selected" {
   count = var.internal ? 0 : 1
 
   name                = var.domain_name
-  resource_group_name = data.azurerm_resource_group.selected[0].name
+  resource_group_name = data.azurerm_resource_group.domain[0].name
 }
 
 resource "azurerm_dns_zone" "sub_domain" {
   count = var.internal ? 0 : 1
 
   name                = "rookout.${var.domain_name}"
-  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : azurerm_resource_group.selected[0].name
+  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
 }
 
 resource "azurerm_dns_ns_record" "rookout" {
@@ -34,14 +34,14 @@ resource "azurerm_dns_ns_record" "rookout" {
 resource "azurerm_private_dns_zone" "private_zone" {
   count               = var.internal ? 1 : 0
   name                = "privatelink.azurewebsites.net"
-  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : azurerm_resource_group.selected[0].name
+  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "dnszonelink" {
   count = var.internal ? 1 : 0
 
   name                  = "${var.environment}-dnszonelink"
-  resource_group_name   = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : azurerm_resource_group.selected[0].name
+  resource_group_name   = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
   private_dns_zone_name = azurerm_private_dns_zone.private_zone[0].name
   virtual_network_id    = var.create_vnet ? azurerm_virtual_network.rookout[0].id : data.azurerm_virtual_network.selected[0].id
 }

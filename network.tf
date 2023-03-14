@@ -3,7 +3,7 @@ resource "azurerm_virtual_network" "rookout" {
 
   name                = "${var.environment}-rookout-vnet"
   location            = var.location
-  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : azurerm_resource_group.selected[0].name
+  resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
   address_space       = [var.vnet_cidr]
 
   tags = local.tags
@@ -18,7 +18,7 @@ data "azurerm_virtual_network" "selected" {
 
 resource "azurerm_subnet" "app_serivce" {
   name                 = "${var.environment}-rookout-app-serivce-subnet"
-  resource_group_name  = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : azurerm_resource_group.selected[0].name
+  resource_group_name  = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
   virtual_network_name = var.create_vnet ? azurerm_virtual_network.rookout[0].name : data.azurerm_virtual_network.selected[0].name
   address_prefixes     = [var.subnet_app_serivce_cidr]
 

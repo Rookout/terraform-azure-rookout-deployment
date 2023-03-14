@@ -1,5 +1,5 @@
 output "resource_group_name" {
-  value = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : azurerm_resource_group.selected[0].name
+  value = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
 }
 
 output "controller_deafult_hostname" {
