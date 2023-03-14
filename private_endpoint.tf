@@ -25,7 +25,7 @@ resource "azurerm_private_endpoint" "controller" {
   name                = "${azurerm_linux_web_app.controller.name}-ctrl-endpoint"
   location            = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].location : data.azurerm_resource_group.selected[0].location
   resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
-  subnet_id           = azurerm_subnet.private_endpoint_subnet[0].id
+  subnet_id           = var.private_endpoint_subnet_name == "" ? azurerm_subnet.private_endpoint_subnet[0].id : data.azurerm_subnet.private_endpoint_selected[0].id
 
   private_dns_zone_group {
     name                 = azurerm_private_dns_zone.private_zone[0].name
@@ -45,7 +45,7 @@ resource "azurerm_private_endpoint" "datastore" {
   name                = "${azurerm_linux_web_app.datastore.name}-db-endpoint"
   location            = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].location : data.azurerm_resource_group.selected[0].location
   resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
-  subnet_id           = azurerm_subnet.private_endpoint_subnet[0].id
+  subnet_id           = var.private_endpoint_subnet_name == "" ? azurerm_subnet.private_endpoint_subnet[0].id : data.azurerm_subnet.private_endpoint_selected[0].id
 
   private_dns_zone_group {
     name                 = azurerm_private_dns_zone.private_zone[0].name
