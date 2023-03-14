@@ -37,7 +37,7 @@ variable "existing_vnet_resource_group_name" {
   description = "Resource group of provided virtual network"
 }
 
-variable "subnet_app_serivce_cidr" {
+variable "subnet_app_service_cidr" {
   type        = string
   default     = "10.10.0.0/26"
   description = "vnet subnets"

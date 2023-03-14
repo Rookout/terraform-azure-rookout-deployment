@@ -9,6 +9,6 @@ module "rookout" {
     existing_vnet_name = "..."
     existing_vnet_resource_group_name = "..."
 
-    subnet_app_serivce_cidr = "x.y.z.0/28"
+    subnet_app_service_cidr = "x.y.z.0/28"
     private_endpoint_subnet_cidr ="x.y.z.64/28"
 }

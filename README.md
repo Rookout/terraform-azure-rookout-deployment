@@ -61,7 +61,7 @@ To use an existing virtual network, the following variables should be passed for
       existing_vnet_name = "..."
       existing_resource_group_name = "..."
 
-      subnet_app_serivce_cidr = "x.y.z.0/28"
+      subnet_app_service_cidr = "x.y.z.0/28"
       private_endpoint_subnet_cidr ="x.y.z.64/28"
    }
    ```
@@ -109,7 +109,7 @@ No modules.
 | [azurerm_public_ip.vpn](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/public_ip) | resource |
 | [azurerm_resource_group.rookout](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/resource_group) | resource |
 | [azurerm_service_plan.controller](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/service_plan) | resource |
-| [azurerm_subnet.app_serivce](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/subnet) | resource |
+| [azurerm_subnet.app_service](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.gateway](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.private_endpoint_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/subnet) | resource |
 | [azurerm_virtual_network.rookout](https://registry.terraform.io/providers/hashicorp/azurerm/3.17.0/docs/resources/virtual_network) | resource |
@@ -138,7 +138,7 @@ No modules.
 | <a name="input_private_endpoint_subnet_cidr"></a> [private\_endpoint\_subnet\_cidr](#input\_private\_endpoint\_subnet\_cidr) | CIDR of private endpoint, for internal deployment | `string` | `"10.10.0.64/26"` | no |
 | <a name="input_private_endpoint_subnet_name"></a> [private\_endpoint\_subnet\_name](#input\_private\_endpoint\_subnet\_name) | Private endpoints subnet, used for internal deployment, Minimum CIDR mask is 26 bits, should be in existing vnet resource group | `string` | `""` | no |
 | <a name="input_rookout_token"></a> [rookout\_token](#input\_rookout\_token) | Rookout's org token | `string` | n/a | yes |
-| <a name="input_subnet_app_serivce_cidr"></a> [subnet\_app\_serivce\_cidr](#input\_subnet\_app\_serivce\_cidr) | vnet subnets | `string` | `"10.10.0.0/26"` | no |
+| <a name="input_subnet_app_service_cidr"></a> [subnet\_app\_service\_cidr](#input\_subnet\_app\_service\_cidr) | vnet subnets | `string` | `"10.10.0.0/26"` | no |
 | <a name="input_subnet_app_service_name"></a> [subnet\_app\_service\_name](#input\_subnet\_app\_service\_name) | App Service delegated subnet, Minimum CIDR mask is 26 bits, should be in existing vnet resource group | `string` | `""` | no |
 | <a name="input_vnet_cidr"></a> [vnet\_cidr](#input\_vnet\_cidr) | CIDR of vnet resource to be created | `string` | `"10.10.0.0/16"` | no |
 
