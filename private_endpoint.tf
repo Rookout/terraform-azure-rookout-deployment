@@ -1,5 +1,5 @@
 data "azurerm_subnet" "private_endpoint_selected" {
-  count = var.internal && var.private_endpoint_subnet_name != "" ? 1 : 0
+  count = var.internal && var.private_endpoint_subnet_name != "" && var.create_private_endpoint ? 1 : 0
 
   name                 = var.private_endpoint_subnet_name
   virtual_network_name = data.azurerm_virtual_network.selected[0].name
@@ -7,7 +7,7 @@ data "azurerm_subnet" "private_endpoint_selected" {
 }
 
 resource "azurerm_subnet" "private_endpoint_subnet" {
-  count = var.internal && var.private_endpoint_subnet_name == "" ? 1 : 0
+  count = var.internal && var.private_endpoint_subnet_name == "" && var.create_private_endpoint ? 1 : 0
 
   name                 = "${var.environment}-rookout-app-private-endpoint-subnet"
   resource_group_name  = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
@@ -20,7 +20,7 @@ resource "azurerm_subnet" "private_endpoint_subnet" {
 
 
 resource "azurerm_private_endpoint" "controller" {
-  count = var.internal ? 1 : 0
+  count = var.internal && var.create_private_endpoint ? 1 : 0
 
   name                = "${azurerm_linux_web_app.controller.name}-ctrl-endpoint"
   location            = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].location : data.azurerm_resource_group.selected[0].location
@@ -40,7 +40,7 @@ resource "azurerm_private_endpoint" "controller" {
 }
 
 resource "azurerm_private_endpoint" "datastore" {
-  count = var.internal ? 1 : 0
+  count = var.internal && var.create_private_endpoint ? 1 : 0
 
   name                = "${azurerm_linux_web_app.datastore.name}-db-endpoint"
   location            = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].location : data.azurerm_resource_group.selected[0].location

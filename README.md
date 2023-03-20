@@ -126,6 +126,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_create_private_endpoint"></a> [create\_private\_endpoint](#input\_create\_private\_endpoint) | Flag to turn off creation of private endpoints, relevent for internal=true | `bool` | `true` | no |
 | <a name="input_create_vnet"></a> [create\_vnet](#input\_create\_vnet) | Flag of creation of virtual network | `bool` | `true` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain of your applicaiton | `string` | `""` | no |
 | <a name="input_domain_resource_group"></a> [domain\_resource\_group](#input\_domain\_resource\_group) | Resource group of domain hosted zone | `string` | `""` | no |

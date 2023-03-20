@@ -32,13 +32,13 @@ resource "azurerm_dns_ns_record" "rookout" {
 }
 
 resource "azurerm_private_dns_zone" "private_zone" {
-  count               = var.internal ? 1 : 0
+  count               = var.internal && var.create_private_endpoint ? 1 : 0
   name                = "privatelink.azurewebsites.net"
   resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "dnszonelink" {
-  count = var.internal ? 1 : 0
+  count = var.internal && var.create_private_endpoint ? 1 : 0
 
   name                  = "${var.environment}-dnszonelink"
   resource_group_name   = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
