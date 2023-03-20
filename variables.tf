@@ -91,3 +91,9 @@ variable "existing_resource_group_name" {
   default     = ""
   description = "Resource group of rookout deployment, if not existing, will create one that named 'ENV-rookout-ResourceGroup'"
 }
+
+variable "create_private_endpoint" {
+  type        = bool
+  default     = true
+  description = "Flag to turn off creation of private endpoints, relevent for internal=true"
+}
