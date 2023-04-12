@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/Rookout/terraform-azure-rookout-deployment/compare/v0.2.2...v0.2.3) (2023-04-12)
+
+
+### Bug Fixes
+
+* add https redirect and health checks ([#18](https://github.com/Rookout/terraform-azure-rookout-deployment/issues/18)) ([98563ce](https://github.com/Rookout/terraform-azure-rookout-deployment/commit/98563ce57bb3eec1eb1487377b5ea5d8c88b5027))
+
 ## [0.1.3](https://github.com/Rookout/terraform-azure-rookout-deployment/compare/v0.1.2...v0.1.3) (2023-03-08)
 
 
