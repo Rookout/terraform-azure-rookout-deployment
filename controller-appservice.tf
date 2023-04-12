@@ -16,12 +16,15 @@ resource "azurerm_linux_web_app" "controller" {
   resource_group_name = var.existing_resource_group_name == "" ? azurerm_resource_group.rookout[0].name : data.azurerm_resource_group.selected[0].name
   service_plan_id     = azurerm_service_plan.controller.id
 
+  https_only = true
+
   site_config {
     #websockets_enabled = true #default = false
     application_stack {
       docker_image     = "rookout/controller"
       docker_image_tag = "latest"
     }
+    health_check_path = "/"
   }
 
   app_settings = local.controller_env_variables
