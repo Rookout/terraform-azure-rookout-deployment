@@ -24,7 +24,7 @@ resource "azurerm_linux_web_app" "controller" {
       docker_image     = "rookout/controller"
       docker_image_tag = "latest"
     }
-    health_check_path = "/"
+    health_check_path = "/healthz"
   }
 
   app_settings = local.controller_env_variables

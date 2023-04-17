@@ -24,7 +24,7 @@ resource "azurerm_linux_web_app" "datastore" {
       docker_image     = "rookout/data-on-prem"
       docker_image_tag = "latest"
     }
-    health_check_path = "/"
+    health_check_path = "/healthz"
   }
   app_settings = local.datastore_env_variables
   tags         = local.tags
